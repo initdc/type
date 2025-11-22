@@ -28,7 +28,9 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go }}
+      # - name: Install Rake
+      #   run: gem install rake
       - name: Test option
-        run: cd option && go test -v
+        run: rake test_option
       - name: Test result
-        run: cd result && go test -v
+        run: rake test_result

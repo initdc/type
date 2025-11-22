@@ -1,9 +1,9 @@
 package option
 
 type Option[T any] struct {
-	value    T    `json:"value"`
-	some     bool `json:"some"`
-	assigned bool `json:"assigned"`
+	value    T
+	some     bool
+	assigned bool
 }
 
 func Some[T any](v T) Option[T] {

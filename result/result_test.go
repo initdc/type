@@ -1,20 +1,17 @@
 package result
 
 import (
-	"testing"
 	. "github.com/initdc/type/option"
+	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
 func TestIsOk(t *testing.T) {
 	r := Ok[int, string](1)
-	if r.IsOk() == false {
-		t.Error("TestIsOk case 1 failed")
-	}
+	assert.Equal(t, r.IsOk(), true, "TestIsOk case 1 failed")
 
 	e := Err[int, string]("error")
-	if e.IsOk() == true {
-		t.Error("TestIsOk case 2 failed")
-	}
+	assert.Equal(t, e.IsOk(), false, "TestIsOk case 2 failed")
 }
 
 func TestIsErr(t *testing.T) {
@@ -32,27 +29,26 @@ func TestIsErr(t *testing.T) {
 	}
 }
 
-
 func TestIsOkAnd(t *testing.T) {
 	r := Ok[int, string](1)
-	if r.IsOkAnd(func(i int) bool { return i == 1}) == false {
+	if r.IsOkAnd(func(i int) bool { return i == 1 }) == false {
 		t.Error("TestOkAnd case 1 failed")
 	}
 
 	e := Err[int, string]("error")
-	if e.IsOkAnd(func(i int) bool { return i == 1}) == true {
+	if e.IsOkAnd(func(i int) bool { return i == 1 }) == true {
 		t.Error("TestOkAnd case 2 failed")
 	}
 }
 
 func TestIsErrAnd(t *testing.T) {
 	r := Ok[int, string](1)
-	if r.IsErrAnd(func(i string) bool { return i == "error"}) == true {
+	if r.IsErrAnd(func(i string) bool { return i == "error" }) == true {
 		t.Error("TestIsErrAnd case 1 failed")
 	}
 
 	e := Err[int, string]("error")
-	if e.IsErrAnd(func(i string) bool { return i == "error"}) == false {
+	if e.IsErrAnd(func(i string) bool { return i == "error" }) == false {
 		t.Error("TestIsErrAnd case 2 failed")
 	}
 }
@@ -60,7 +56,7 @@ func TestIsErrAnd(t *testing.T) {
 func TestConvOk(t *testing.T) {
 	r := Ok[int, string](1)
 	if r.ConvOk() != Some(1) {
-	  t.Error("TestConvOk case 1 failed")
+		t.Error("TestConvOk case 1 failed")
 	}
 
 	e := Err[int, string]("error")
@@ -93,14 +89,12 @@ func TestUnwrap(t *testing.T) {
 	}
 }
 
-
 func TestUnwrapErr(t *testing.T) {
 	e := Err[int, string]("error")
 	if e.UnwrapErr() != "error" {
 		t.Error("TestUnwrapErr case 1 failed")
 	}
 }
-
 
 func TestUnwrapOr(t *testing.T) {
 	r := Ok[int, string](1)
@@ -125,4 +119,3 @@ func TestUnwrapOrElse(t *testing.T) {
 		t.Error("TestUnwrapOrElse case 2 failed")
 	}
 }
-

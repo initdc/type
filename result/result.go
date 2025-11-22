@@ -6,10 +6,10 @@ import (
 )
 
 type Result[T any, E any] struct {
-	value    T    `json:"value"`
-	err      E    `json:"err"`
-	ok       bool `json:"ok"`
-	assigned bool `json:"assigned"`
+	value    T
+	err      E
+	ok       bool
+	assigned bool
 }
 
 func Ok[T any, E any](v T) Result[T, E] {
